@@ -1,29 +1,13 @@
 describe ArrowPayments::Configuration do
-  describe "#api_key=" do
-    it "sets gateway api key" do
-      ArrowPayments::Configuration.api_key = "foobar"
-      ArrowPayments::Configuration.api_key.should eq("foobar")
-    end
-  end
+  it "sets credentials" do
+    described_class.api_key = "foobar"
+    described_class.mode = "production"
+    described_class.merchant_id = 12345
+    described_class.debug = true
 
-  describe "#mode=" do
-    it "sets gateway mode" do
-      ArrowPayments::Configuration.mode = "production"
-      ArrowPayments::Configuration.mode.should eq("production")
-    end
-  end
-
-  describe "#merchant_id=" do
-    it "sets merchant ID" do
-      ArrowPayments::Configuration.merchant_id = 12345
-      ArrowPayments::Configuration.merchant_id.should eq(12345)
-    end
-  end
-
-  describe "#debug=" do
-    it "sets debug mode" do
-      ArrowPayments::Configuration.debug = true
-      ArrowPayments::Configuration.debug.should be_true
-    end
+    expect(described_class.api_key).to eq("foobar")
+    expect(described_class.mode).to eq("production")
+    expect(described_class.merchant_id).to eq(12345)
+    expect(described_class.debug).to eq(true)
   end
 end

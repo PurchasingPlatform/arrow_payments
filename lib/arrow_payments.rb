@@ -18,7 +18,8 @@ module ArrowPayments
   autoload :Transactions,     "arrow_payments/client/transactions"
 
   class << self
-    def client(options={})
+    def client(options=nil)
+      options ||= {}
       ArrowPayments::Client.new(options)
     end
   end
