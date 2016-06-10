@@ -3,8 +3,6 @@ SimpleCov.start do
   add_filter ".bundle"
 end
 
-$:.unshift File.expand_path("../..", __FILE__)
-
 require 'webmock'
 require 'webmock/rspec'
 require 'json'
@@ -24,9 +22,7 @@ def json_fixture(file)
 end
 
 def api_url(path=nil)
-  url = "http://demo.arrowpayments.com/api"
-  url << path if path
-  url
+  ["http://demo.arrowpayments.com/api", path].join
 end
 
 def stub_api(method, path, options={})
