@@ -21,17 +21,17 @@ module ArrowPayments
       end
 
       params = {
-        'CustomerId'     => customer_id,
-        'BillingAddress' => billing_address.to_source_hash
+        "CustomerId"     => customer_id,
+        "BillingAddress" => billing_address.to_source_hash
       }
 
       # If return url is blank means that its not browser-less payment method
       # creation. Reponse should include token ID for the Step 3.
       if return_url
-        params['ReturnUrl'] = return_url
+        params["ReturnUrl"] = return_url
       end
 
-      post("/paymentmethod/start", params)['FormPostUrl']
+      post("/paymentmethod/start", params)["FormPostUrl"]
     end
 
     # Setup a new payment method
@@ -46,14 +46,14 @@ module ArrowPayments
       end
 
       resp = post_to_url(form_url, payment_method_form(cc))
-      resp.headers['location'].scan(/token-id=(.*)/).flatten.first
+      resp.headers["location"].scan(/token-id=(.*)/).flatten.first
     end
 
     # Complete payment method creation
     # @param [String] token ID
     # @return [PaymentMethod]
     def complete_payment_method(token_id)
-      resp = post('/paymentmethod/complete', 'TokenID' => token_id)
+      resp = post("/paymentmethod/complete", "TokenID" => token_id)
       ArrowPayments::PaymentMethod.new(resp)
     end
 
@@ -73,19 +73,19 @@ module ArrowPayments
     # @param [Integer] payment method ID
     # @return [Boolean]
     def delete_payment_method(id)
-      resp = post('/paymentmethod/delete', 'PaymentMethodId' => id)
-      resp['Success'] == true
+      resp = post("/paymentmethod/delete", "PaymentMethodId" => id)
+      resp["Success"] == true
     end
 
     private
 
     def payment_method_form(cc)
       {
-        'billing-cc-number'  => cc.number,
-        'billing-cc-exp'     => [cc.expiration_month, cc.expiration_year].join,
-        'billing-cvv'        => cc.security_code,
-        'billing-first-name' => cc.first_name,
-        'billing-last-name'  => cc.last_name
+        "billing-cc-number"  => cc.number,
+        "billing-cc-exp"     => [cc.expiration_month, cc.expiration_year].join,
+        "billing-cvv"        => cc.security_code,
+        "billing-first-name" => cc.first_name,
+        "billing-last-name"  => cc.last_name
       }
     end
   end

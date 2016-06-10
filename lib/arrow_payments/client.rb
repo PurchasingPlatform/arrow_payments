@@ -19,7 +19,7 @@ module ArrowPayments
     #
     def initialize(options={})
       @api_key     = options[:api_key] || ArrowPayments::Configuration.api_key
-      @mode        = (options[:mode] || ArrowPayments::Configuration.mode || 'production').to_s
+      @mode        = (options[:mode] || ArrowPayments::Configuration.mode || "production").to_s
       @merchant_id = options[:merchant_id] || ArrowPayments::Configuration.merchant_id
       @debug       = (options[:debug] || ArrowPayments::Configuration.debug) === true
 
@@ -39,13 +39,13 @@ module ArrowPayments
     # Check if client is in sandbox mode
     # @return [Boolean]
     def sandbox?
-      mode == 'sandbox'
+      mode == "sandbox"
     end
 
     # Check if client is in production mode
     # @return [Boolean]
     def production?
-      mode == 'production'
+      mode == "production"
     end
 
     # Check if debug mode is enabled
