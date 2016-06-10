@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 class EntityTester < ArrowPayments::Entity
   property :foo,     :from => 'Foo'
   property :foobar,  :from => 'Foobar'

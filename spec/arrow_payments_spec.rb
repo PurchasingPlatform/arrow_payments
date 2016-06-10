@@ -1,10 +1,8 @@
-require 'spec_helper'
-
 describe ArrowPayments do
   describe '#client' do
     it 'returns client instance for options' do
       client = ArrowPayments.client(
-        :api_key => 'foo', 
+        :api_key => 'foo',
         :mode => 'production',
         :merchant_id => 12345
       )
@@ -28,7 +26,7 @@ describe ArrowPayments do
         ArrowPayments::Configuration.mode = nil
         ArrowPayments::Configuration.merchant_id = nil
       end
-      
+
       it 'returns preconfigured client instance' do
         client = ArrowPayments.client
         client.api_key.should eq('bar')

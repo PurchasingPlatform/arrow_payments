@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ArrowPayments::RecurringBilling do
   it { should respond_to :id }
   it { should respond_to :payment_method_id }

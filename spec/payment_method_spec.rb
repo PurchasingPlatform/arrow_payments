@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ArrowPayments::PaymentMethod do
   it { should respond_to :id }
   it { should respond_to :card_type }

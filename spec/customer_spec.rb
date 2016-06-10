@@ -1,5 +1,3 @@
-require 'spec_helper' 
-
 describe ArrowPayments::Customer do
   it { should respond_to :id }
   it { should respond_to :name }

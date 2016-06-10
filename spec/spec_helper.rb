@@ -1,12 +1,10 @@
-require 'simplecov'
+require "simplecov"
 SimpleCov.start do
   add_filter ".bundle"
 end
 
-require 'webmock'
-require 'webmock/rspec'
-require 'json'
-require 'lib/arrow_payments'
+require "webmock/rspec"
+require "arrow_payments"
 
 def fixture_path(filename=nil)
   path = File.expand_path("../fixtures", __FILE__)

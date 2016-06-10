@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ArrowPayments::LineItem do
   it { should respond_to :id }
   it { should respond_to :commodity_code }

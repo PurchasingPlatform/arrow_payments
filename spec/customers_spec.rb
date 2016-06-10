@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ArrowPayments::Customers do
   let(:client) { ArrowPayments.client }
 

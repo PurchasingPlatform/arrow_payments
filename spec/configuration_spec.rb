@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ArrowPayments::Configuration do
   describe '#api_key=' do
     it 'sets gateway api key' do

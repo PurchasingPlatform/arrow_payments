@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ArrowPayments::Connection do
   let(:subject) { ArrowPayments::Client.new(:api_key => 'foo', :merchant_id => 'bar') }
 

@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ArrowPayments::Client do
   describe '#initialize' do
     it 'requires an api key' do
