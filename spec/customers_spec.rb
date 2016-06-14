@@ -1,5 +1,5 @@
 describe ArrowPayments::Customers do
-  let(:client) { ArrowPayments.client(debug: false) }
+  let(:client) { ArrowPayments.client }
   let(:customers) { client.customers }
   let(:customer) { client.customer(customer_id) }
   let(:customer_id) { 10162 }

@@ -1,5 +1,5 @@
 describe ArrowPayments::Connection do
-  let(:subject) { ArrowPayments::Client.new(api_key: "foo", merchant_id: "bar") }
+  let(:subject) { ArrowPayments::Client.new(api_key: "foo", merchant_id: "bar", debug: false) }
   let(:headers) do
     {
       'Accept'=>'application/json',

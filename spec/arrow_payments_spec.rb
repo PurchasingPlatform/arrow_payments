@@ -1,6 +1,6 @@
 describe ArrowPayments do
   let(:client) do
-    ArrowPayments.client(api_key: "foo", mode: "production", merchant_id: 12345)
+    ArrowPayments.client(api_key: "foo", mode: "production", merchant_id: 12345, debug: false)
   end
 
   it "returns client instance for options" do
@@ -18,11 +18,11 @@ describe ArrowPayments do
       ArrowPayments::Configuration.merchant_id = 12345
     end
 
-    # after do
-    #   # ArrowPayments::Configuration.api_key = nil
-    #   # ArrowPayments::Configuration.mode = nil
-    #   # ArrowPayments::Configuration.merchant_id = nil
-    # end
+    after do
+      ArrowPayments::Configuration.api_key = nil
+      ArrowPayments::Configuration.mode = nil
+      ArrowPayments::Configuration.merchant_id = nil
+    end
 
     it "returns preconfigured client instance" do
       p_client = ArrowPayments.client
