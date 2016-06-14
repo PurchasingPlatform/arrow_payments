@@ -1,15 +1,16 @@
 describe ArrowPayments::LineItem do
-  it { should respond_to :id }
-  it { should respond_to :commodity_code }
-  it { should respond_to :description }
-  it { should respond_to :price }
-  it { should respond_to :product_code }
-  it { should respond_to :unit_of_measure }
+  it { is_expected.to respond_to :id }
+  it { is_expected.to respond_to :commodity_code }
+  it { is_expected.to respond_to :description }
+  it { is_expected.to respond_to :price }
+  it { is_expected.to respond_to :product_code }
+  it { is_expected.to respond_to :unit_of_measure }
 
   describe "#to_source_hash" do
+    let(:item) { described_class.new(json_fixture("line_item.json")) }
+
     it "returns a formatted hash" do
-      item = ArrowPayments::LineItem.new(json_fixture("line_item.json"))
-      item.to_source_hash.should eq(json_fixture("line_item.json"))
+      expect(item.to_source_hash).to eq(json_fixture("line_item.json"))
     end
   end
 end
