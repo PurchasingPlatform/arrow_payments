@@ -59,7 +59,7 @@ module ArrowPayments
     end
 
     def connection(url)
-      connection = Faraday.new(url) do |c|
+      @connection ||= Faraday.new(url) do |c|
         c.use(Faraday::Request::UrlEncoded)
         c.use(Faraday::Response::Logger) if debug?
         c.adapter(Faraday.default_adapter)
