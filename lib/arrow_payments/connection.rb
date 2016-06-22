@@ -6,11 +6,6 @@ module ArrowPayments
     API_PRODUCTION = "https://gateway.arrowpayments.com"
     API_SANDBOX = "http://demo.arrowpayments.com"
 
-    CONNECTION_OPTIONS = {
-      :timeout      => 10,
-      :open_timeout => 10
-    }
-
     def get(path, params={}, raw=false)
       request(:get, path, params, raw)
     end
@@ -44,6 +39,8 @@ module ArrowPayments
 
       response = connection(api_url).send(method, path, params) do |request|
         request.headers = headers
+        request.options.timeout = 10
+        request.options.open_timeout = 10
 
         case method
         when :get, :delete
@@ -62,7 +59,7 @@ module ArrowPayments
     end
 
     def connection(url)
-      connection = Faraday.new(url, CONNECTION_OPTIONS) do |c|
+      connection = Faraday.new(url) do |c|
         c.use(Faraday::Request::UrlEncoded)
         c.use(Faraday::Response::Logger) if debug?
         c.adapter(Faraday.default_adapter)

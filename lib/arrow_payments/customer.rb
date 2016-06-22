@@ -1,13 +1,13 @@
 module ArrowPayments
   class Customer < Entity
-    property :id,                 :from => "ID"
-    property :name,               :from => "Name"
-    property :code,               :from => "Code"
-    property :contact,            :from => "PrimaryContact"
-    property :phone,              :from => "PrimaryContactPhone"
-    property :email,              :from => "PrimaryContactEmailAddress"
-    property :recurring_billings, :from => "RecurrentBilling"
-    property :payment_methods,    :from => "PaymentMethods"
+    property :id,                 from: "ID"
+    property :name,               from: "Name"
+    property :code,               from: "Code"
+    property :contact,            from: "PrimaryContact"
+    property :phone,              from: "PrimaryContactPhone"
+    property :email,              from: "PrimaryContactEmailAddress"
+    property :recurring_billings, from: "RecurrentBilling"
+    property :payment_methods,    from: "PaymentMethods"
 
     def PaymentMethods=(data)
       if data.kind_of?(Array)
