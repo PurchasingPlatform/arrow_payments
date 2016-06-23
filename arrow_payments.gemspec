@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ["Dan Sosedoff"]
   s.email       = ["dan.sosedoff@gmail.com"]
 
-  s.add_development_dependency "webmock",   "~> 1.6"
+  s.add_development_dependency "webmock",   "~> 1.6.0"
   s.add_development_dependency "rake",      "~> 11.0"
   s.add_development_dependency "rspec",     "~> 3.4"
   s.add_development_dependency "simplecov", "~> 0.7"
