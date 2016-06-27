@@ -3,7 +3,7 @@ module ArrowPayments
     # Get all existing customers
     # @return [Array<Customer>]
     def customers
-      get('/customers').map { |c| Customer.new(c) }
+      get("/customers").map { |c| Customer.new(c) }
     end
 
     alias :get_customer :customers
@@ -32,18 +32,18 @@ module ArrowPayments
     # @return [Boolean] update result
     def update_customer(customer)
       params = customer.to_source_hash
-      params['CustomerID'] = customer.id
+      params["CustomerID"] = customer.id
 
-      resp = post('/customer/update', params)
-      resp['Success'] == true
+      resp = post("/customer/update", params)
+      resp["Success"] == true
     end
 
     # Delete an existing customer
     # @param [Integer] customer ID
     # @return [Boolean]
     def delete_customer(id)
-      resp = post('/customer/delete', 'CustomerID' => id)
-      resp['Success'] == true
+      resp = post("/customer/delete", "CustomerID" => id)
+      resp["Success"] == true
     end
   end
 end

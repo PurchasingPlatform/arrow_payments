@@ -1,55 +1,53 @@
-require 'spec_helper'
-
 class EntityTester < ArrowPayments::Entity
-  property :foo,     :from => 'Foo'
-  property :foobar,  :from => 'Foobar'
-  property :foo_bar, :from => 'FooBar'
+  property :foo,     from: "Foo"
+  property :foobar,  from: "Foobar"
+  property :foo_bar, from: "FooBar"
 end
 
 describe ArrowPayments::Entity do
   let(:attributes) do
-    {'Foo' => 'a', 'Foobar' => 'b', 'FooBar' => 'c'}
+    {"Foo" => "a", "Foobar" => "b", "FooBar" => "c"}
   end
 
-  describe '#new' do
-    it 'assigns properties' do
+  describe "#new" do
+    it "assigns properties" do
       entity = EntityTester.new(attributes)
 
-      entity.foo.should eq('a')
-      entity.foobar.should eq('b')
-      entity.foo_bar.should eq('c')
+      expect(entity.foo).to eq("a")
+      expect(entity.foobar).to eq("b")
+      expect(entity.foo_bar).to eq("c")
     end
 
-    it 'ignores undefined attributes' do
-      entity = EntityTester.new(attributes.merge('Bro' => 'Sup?'))
+    it "ignores undefined attributes" do
+      entity = EntityTester.new(attributes.merge("Bro" => "Sup?"))
 
       expect { entity.foo }.not_to raise_error
-      expect { entity['Bro'] }.to raise_error NoMethodError
+      expect { entity["Bro"] }.to raise_error NoMethodError
     end
   end
 
-  describe '#properties_map' do
-    it 'returns hash with property mappings' do
+  describe "#properties_map" do
+    it "returns hash with property mappings" do
       map = EntityTester.properties_map
 
-      map.should be_a Hash
-      map.should_not be_empty
-      map.keys.should include(:foo, :foobar, :foo_bar)
-      map[:foo].should eq('Foo')
-      map[:foobar].should eq('Foobar')
-      map[:foo_bar].should eq('FooBar')
+      expect(map).to be_a Hash
+      expect(map).to_not be_empty
+      expect(map.keys).to include(:foo, :foobar, :foo_bar)
+      expect(map[:foo]).to eq("Foo")
+      expect(map[:foobar]).to eq("Foobar")
+      expect(map[:foo_bar]).to eq("FooBar")
     end
   end
 
-  describe '#to_source_hash' do
-    it 'returns hash as source format' do
+  describe "#to_source_hash" do
+    it "returns hash as source format" do
       entity = EntityTester.new(attributes)
       hash = entity.to_source_hash
 
-      hash.size.should eq(3)
-      hash['Foo'].should eq('a')
-      hash['Foobar'].should eq('b')
-      hash['FooBar'].should eq('c')
+      expect(hash.size).to eq(3)
+      expect(hash["Foo"]).to eq("a")
+      expect(hash["Foobar"]).to eq("b")
+      expect(hash["FooBar"]).to eq("c")
     end
   end
 end

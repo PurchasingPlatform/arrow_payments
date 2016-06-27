@@ -1,4 +1,4 @@
-require 'hashie'
+require "hashie"
 
 module ArrowPayments
   class Entity < Hashie::Trash
@@ -8,7 +8,7 @@ module ArrowPayments
       attr_reader :properties_map
     end
 
-    instance_variable_set('@properties_map', {})
+    instance_variable_set("@properties_map", {})
 
     def to_source_hash(options={})
       hash = {}

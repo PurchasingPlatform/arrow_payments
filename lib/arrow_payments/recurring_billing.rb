@@ -6,20 +6,20 @@ module ArrowPayments
   class RecurringBilling < Entity
     FREQUENCIES = %w(W M Q Y)
     FREQUENCY_NAMES = {
-      'W' => 'Weekly',
-      'M' => 'Monthly', 
-      'Q' => 'Quarterly',
-      'Y' => 'Yearly'
+      "W" => "Weekly",
+      "M" => "Monthly",
+      "Q" => "Quarterly",
+      "Y" => "Yearly"
     }
 
-    property :id,                :from => 'ID'
-    property :payment_method_id, :from => 'PaymentMethodId'
-    property :frequency,         :from => 'Frequency'
-    property :total_amount,      :from => 'TotalAmount'
-    property :shipping_amount,   :from => 'ShippingAmount'
-    property :description,       :from => 'Description'
-    property :transaction_day,   :from => 'TransactionDay'
-    property :date_created,      :from => 'DateCreated'
+    property :id,                from: "ID"
+    property :payment_method_id, from: "PaymentMethodId"
+    property :frequency,         from: "Frequency"
+    property :total_amount,      from: "TotalAmount"
+    property :shipping_amount,   from: "ShippingAmount"
+    property :description,       from: "Description"
+    property :transaction_day,   from: "TransactionDay"
+    property :date_created,      from: "DateCreated"
 
     # Get billing frequency name
     # @return [String]

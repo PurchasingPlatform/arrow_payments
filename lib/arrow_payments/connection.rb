@@ -1,15 +1,10 @@
-require 'faraday'
-require 'json'
+require "faraday"
+require "json"
 
 module ArrowPayments
   module Connection
-    API_PRODUCTION = 'https://gateway.arrowpayments.com'
-    API_SANDBOX = 'http://demo.arrowpayments.com'
-
-    CONNECTION_OPTIONS = {
-      :timeout      => 10,
-      :open_timeout => 10
-    }
+    API_PRODUCTION = "https://gateway.arrowpayments.com"
+    API_SANDBOX = "http://demo.arrowpayments.com"
 
     def get(path, params={}, raw=false)
       request(:get, path, params, raw)
@@ -28,22 +23,24 @@ module ArrowPayments
     def request(method, path, params={}, raw=false)
       if method == :post
         path = "/api#{path}"
-        
-        params['ApiKey'] = api_key
-        params['MID'] = merchant_id
+
+        params["ApiKey"] = api_key
+        params["MID"] = merchant_id
       else
         path = "/api/#{api_key}#{path}"
       end
 
       headers = {
-        'Accept'       => 'application/json',
-        'Content-Type' => 'application/json'
+        "Accept"       => "application/json",
+        "Content-Type" => "application/json"
       }
 
       api_url = production? ? API_PRODUCTION : API_SANDBOX
 
       response = connection(api_url).send(method, path, params) do |request|
         request.headers = headers
+        request.options.timeout = 10
+        request.options.open_timeout = 10
 
         case method
         when :get, :delete
@@ -55,14 +52,14 @@ module ArrowPayments
       end
 
       unless response.success?
-        handle_failed_response(response)        
+        handle_failed_response(response)
       end
 
       raw ? response : JSON.parse(response.body)
     end
 
     def connection(url)
-      connection = Faraday.new(url, CONNECTION_OPTIONS) do |c|
+      @connection ||= Faraday.new(url) do |c|
         c.use(Faraday::Request::UrlEncoded)
         c.use(Faraday::Response::Logger) if debug?
         c.adapter(Faraday.default_adapter)
@@ -72,11 +69,11 @@ module ArrowPayments
     def handle_failed_response(response)
       case response.status
       when 400
-        raise ArrowPayments::BadRequest, response.headers['error']
+        raise ArrowPayments::BadRequest, response.headers["error"]
       when 404
-        raise ArrowPayments::NotFound, response.headers['error']
+        raise ArrowPayments::NotFound, response.headers["error"]
       when 500
-        raise ArrowPayments::Error, response.headers['error']
+        raise ArrowPayments::Error, response.headers["error"]
       end
     end
   end

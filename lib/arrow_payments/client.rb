@@ -7,51 +7,34 @@ module ArrowPayments
 
     attr_reader :api_key, :mode, :merchant_id, :debug
 
-    # Initialize a new client instance
-    # @param [Hash] client connection options
-    # 
-    # Available options:
-    #
-    #   :api_key - Your API key (required)
-    #   :mode - API mode (sandox / production)
-    #   :merchant_id - Your merchant ID 
-    #   :debug - True for request logging
-    #
-    def initialize(options={})
-      @api_key     = options[:api_key] || ArrowPayments::Configuration.api_key
-      @mode        = (options[:mode] || ArrowPayments::Configuration.mode || 'production').to_s
-      @merchant_id = options[:merchant_id] || ArrowPayments::Configuration.merchant_id
-      @debug       = (options[:debug] || ArrowPayments::Configuration.debug) === true
+    def initialize(options=nil)
+      options ||= {}
+      @api_key     = options[:api_key] || config(:api_key)
+      @mode        = options[:mode] || config(:mode) || "production"
+      @merchant_id = options[:merchant_id] || config(:merchant_id)
+      @debug       = !!options[:debug] || !!config(:debug)
 
-      if api_key.to_s.empty?
-        raise ArgumentError, "API key required"
-      end
-
-      if merchant_id.to_s.empty?
-        raise ArgumentError, "Merchant ID required"
-      end
-
-      unless %(sandbox production).include?(mode)
-        raise ArgumentError, "Invalid mode: #{mode}"
-      end
+      raise ArgumentError, "API key required" unless api_key
+      raise ArgumentError, "Merchant ID required" unless merchant_id
+      raise ArgumentError, "Invalid mode: #{mode}" unless %(sandbox production).include?(mode)
     end
 
-    # Check if client is in sandbox mode
-    # @return [Boolean]
     def sandbox?
-      mode == 'sandbox'
+      mode == "sandbox"
     end
 
-    # Check if client is in production mode
-    # @return [Boolean]
     def production?
-      mode == 'production'
+      mode == "production"
     end
 
-    # Check if debug mode is enabled
-    # @return [Boolean]
     def debug?
       debug == true
+    end
+
+    private
+
+    def config(option)
+      ArrowPayments::Configuration.send(option)
     end
   end
 end
