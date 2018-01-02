@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "faraday",            "~> 0.9.2"
   s.add_dependency "faraday_middleware", "~> 0.10.0"
-  s.add_dependency "hashie",             "~> 2.0"
+  s.add_dependency "hashie",             "~> 3.5.7"
   s.add_dependency "json",               "~> 1.8"
 
   s.files = Dir["lib/*.rb"] + Dir["lib/arrow_payments/*.rb"]
