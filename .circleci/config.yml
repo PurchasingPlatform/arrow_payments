@@ -5,7 +5,7 @@ jobs:
     parallelism: 1
     shell: /bin/bash --login
     docker:
-    - image: circleci/ruby:2.3-node-browsers
+    - image: circleci/ruby:2.3
       environment:
         BUNDLE_JOBS   : 4
         BUNDLE_RETRY  : 3
