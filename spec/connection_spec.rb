@@ -15,6 +15,6 @@ describe ArrowPayments::Connection do
 
     expect {
       subject.get("/hello")
-    }.to raise_error Faraday::Error::TimeoutError
+    }.to raise_error Faraday::Error::ConnectionFailed
   end
 end

@@ -9,16 +9,16 @@ Gem::Specification.new do |s|
   s.authors     = ["Dan Sosedoff"]
   s.email       = ["dan.sosedoff@gmail.com"]
 
-  s.add_development_dependency "webmock",   "~> 1.6.0"
+  s.add_development_dependency "webmock",   ">= 2.3.2"
   s.add_development_dependency "rake",      "~> 11.0"
   s.add_development_dependency "rspec",     "~> 3.4"
-  s.add_development_dependency "simplecov", "~> 0.7"
+  s.add_development_dependency "simplecov", ">= 0.16.1"
   s.add_development_dependency "pry"
 
-  s.add_dependency "faraday",            "~> 0.9.2"
-  s.add_dependency "faraday_middleware", "~> 0.10.0"
-  s.add_dependency "hashie",             "~> 2.0"
-  s.add_dependency "json",               "~> 1.8"
+  s.add_dependency "faraday",            ">= 0.9.2", "< 1.0"
+  s.add_dependency "faraday_middleware", ">= 0.10.0", "< 1.0"
+  s.add_dependency "hashie",             ">= 2.0"
+  s.add_dependency "json",               ">= 2.1"
 
   s.files = Dir["lib/*.rb"] + Dir["lib/arrow_payments/*.rb"]
   s.files += Dir["[A-Z]*"] + Dir["spec/**/*"]
